@@ -24,7 +24,7 @@ Rating: live update of 3 star rating
 Timer:  game time in seconds is displayed upon winning.
 
 
-## How to play
+## Let the game begin...
 
 Click [this link](https://cscottburns.github.io/painting-pairing/)
 
