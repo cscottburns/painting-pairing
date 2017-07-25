@@ -4,7 +4,7 @@
 
 "Memory Game" is my extracurricular project chosen for the requirement of Udacity's Intro to Programming Nanodegree Program, with the stated purpose of demonstrating my mastery of HTML, CSS, and JavaScript. 
 
-The objective is to match all the randomly scattered dublicates of eight famous paintings hidden behind a 4 x 4 empty gallery. 
+The objective is to match all the randomly scattered duplicates of eight famous paintings hidden behind a 4 x 4 empty gallery. 
 
 The player selects two blank squares for an attempted match: if there is a match the paintings remain displayed, otherwise they return hidden at the same location.  If all eight pairs of paintings are matched, a beautifully framed congratulations is presented showing the player's game time and his rating (designed to always be less than the top 3 star rating).
 
