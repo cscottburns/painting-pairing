@@ -26,5 +26,5 @@ Timer:  game time in seconds is displayed upon winning.
 
 ## How to play
 
-Click [this link](https://github.com/cscottburns/painting-pairing.git)
+Click [this link](https://cscottburns.github.io/painting-pairing/)
 
