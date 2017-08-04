@@ -9,7 +9,8 @@ body {
     margin: 0 20px;
  }
 
-.div1 {
+ /*empty tile backdrop*/
+.blank {
     float: left;
     border: 1px solid black;
     border-radius: 10px;
@@ -24,8 +25,9 @@ body {
     background-origin: padding-box;
     cursor: pointer;
 }
-div.div1:hover {opacity: 0.7;}
+div.blank:hover {opacity: 0.7;}
 
+ /*painting image*/
 #card {
     display: none;
     transform: scale(0.9,0.9);
@@ -59,6 +61,7 @@ div.div1:hover {opacity: 0.7;}
     to {transform: scale(1,1);}
 }
 
+ /*congrats text*/
 .text {
   color: white;
   font-size: 40px;
@@ -85,9 +88,10 @@ div.div1:hover {opacity: 0.7;}
   background-color: FireBrick;
   border: none;
   border-radius: 20%;
-  box-shadow: 2px 3px #999;*/
+  box-shadow: 2px 3px #999;
 }
 
+ /*play again*/
 .button {
   position:relative;
   margin-top: 80px;
