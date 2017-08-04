@@ -1,5 +1,4 @@
 
-
 function genRand(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
 }
@@ -11,12 +10,14 @@ var stars = '&#10022 &#10022 &#10022';
 //TODO:  increase moves to 12 and 16: if first 4 moves uncovered unique 8 cards, then with perfect
 // retention the score would be 12.
 
-var id1 = [];
-var id2 = [];
-var img1 = [];
-var img2 = [];
 var match = 0;
 var trys = 0;
+ // image ids
+var id1 = "";
+var id2 = "";
+ // image object
+var img1 = null;
+var img2 = null;
 var imgArray = [
     'img1.png',
     'img2.png',
@@ -26,6 +27,14 @@ var imgArray = [
     'img6.png',
     'img7.png',
     'img8.png',
+    'img1_dup.png',
+    'img2_dup.png',
+    'img3_dup.png',
+    'img4_dup.png',
+    'img5_dup.png',
+    'img6_dup.png',
+    'img7_dup.png',
+    'img8_dup.png',
 ];
 
 
@@ -34,7 +43,7 @@ function intGame() {
 
     // Add duplicates to image array
     var Images = imgArray;
-    Images = Images.concat(Images);
+    // Images = Images.concat(Images);
     deck = [];
     for (var i = 1; i <= Images.length; i++) {
        deck.push(i);
@@ -59,7 +68,7 @@ function intGame() {
       x.setAttribute('id', Images[imgIndex[i-1]-1]);
       x.setAttribute('name', i);
       x.setAttribute('onclick', 'imgBlock(this)');
-      x.setAttribute('class', 'div1');
+      x.setAttribute('class', 'blank');
       document.body.appendChild(x);
 
       var y = document.createElement('IMG');
@@ -72,10 +81,10 @@ function intGame() {
 }
 
 // update display of moves, matches and rating
-function moveMatch() {
+function updateDisplay() {
     document.getElementById('trys').innerHTML = 'Moves: '+trys
-    +'&nbsp &nbsp Matches: '+ match
-    +'&nbsp &nbsp Rating:'+ stars;
+    +'&nbsp; &nbsp; Matches: '+ match
+    +'&nbsp; &nbsp; Rating:'+ stars;
 }
 
 var count = 0;
@@ -88,9 +97,16 @@ var sec2 = sec1;
 var seconds = 0;
 var start = 0;
 
-// Start timer. Every 2 selections (count 1,2): reveal image, check match,
-// end game when all match and present replay option
-function imgBlock(e){
+// function imgBlock(e), where e is short for event, is executed when user clicks a tile.
+// Upon the first click the timer is started.
+// A click on a blank tile reveals a hidden image.
+// A second click on a blank tile reveals an image and the Move counter increases by one.
+// If the images match they remain visible and the match counter increases by one; if not,
+// they become hidden.
+// When all 8 pairs of images are match a congrats animation is displayed with game time
+// and option to play again.
+// The reset button may be clicked at any time to intiate a new randomly shuflled game.
+function imgBlock(e) {
     count++;
     if (count<3) {
         if (count===1) {
@@ -106,7 +122,7 @@ function imgBlock(e){
             img1 = e.firstElementChild;
             img1.style.display = 'block';
             e.style.opacity = 1;
-            moveMatch();
+            updateDisplay();
         }
         if (count===2) {
             // update star rating
@@ -125,12 +141,12 @@ function imgBlock(e){
             img2.style.display = 'block';
             e.style.opacity = 1;
             // check match
-            if (id1==id2) {
+            if (id1[3]==id2[3] & id1!=id2) {
                 match++;
                 count = 0;
-                moveMatch();
+                updateDisplay();
                 // end game when all match and present replay option
-                if (match==(imgArray.length)) {
+                if (match==(imgArray.length/2)) {
                     // calculate game time
                     date2 = new Date();
                     min2 = date2.getMinutes();
@@ -139,7 +155,7 @@ function imgBlock(e){
 
                     // display end game modal
                     document.getElementById('divEnd').style.display = 'block';
-                    moveMatch();
+                    updateDisplay();
                     document.getElementById('divText').innerHTML = 'Congratulations!<br>'+
                     'Time:&nbsp'+seconds+'sec'+'<br>Rating: '+stars+
                     '<button id="restartBtn" class="button">play again</button>';
@@ -151,8 +167,6 @@ function imgBlock(e){
                         for (var i = 0; i < imgArray.length; i++) {
                             var image_x = document.getElementById(imgArray[i]);
                             image_x.parentNode.removeChild(image_x);
-                            image_x = document.getElementById(imgArray[i]);
-                            image_x.parentNode.removeChild(image_x);
                         }
                         trys = 0;
                         match = 0;
@@ -160,7 +174,7 @@ function imgBlock(e){
                         nstars = 3;
                         stars = '&#10022 &#10022 &#10022';
                         intGame();
-                        moveMatch();
+                        updateDisplay();
                     }
                 }
             } else {
@@ -168,7 +182,7 @@ function imgBlock(e){
                 setTimeout(function(){img1.style.display = 'none'; }, 600);
                 setTimeout(function(){img2.style.display = 'none'; }, 600);
                 count = 0;
-                moveMatch();
+                updateDisplay();
                 return;
             }
         }
