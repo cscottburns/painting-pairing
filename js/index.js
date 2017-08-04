@@ -41,9 +41,7 @@ var imgArray = [
 function intGame() {
     start = 0;
 
-    // Add duplicates to image array
     var Images = imgArray;
-    // Images = Images.concat(Images);
     deck = [];
     for (var i = 1; i <= Images.length; i++) {
        deck.push(i);
